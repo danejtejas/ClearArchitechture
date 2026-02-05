@@ -24,4 +24,4 @@ jobs:
           xcodebuild clean build \
             -project "CleanArchitectureDemo.xcodeproj" \
             -scheme "dev" \
-            -destination 'platform=iOS Simulator,name=Any iOS Device'
+           -destination 'platform=iOS Simulator,name=iPhone 16'
