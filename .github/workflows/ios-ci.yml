@@ -19,7 +19,7 @@ jobs:
             pod install
           fi
 
-      - name: Build and run tests
+      - name: Build
         run: |
           xcodebuild clean test \
             -project "CleanArchitectureDemo.xcodeproj" \
