@@ -6,19 +6,22 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode.app
-
-      - name: Build App
+      - name: Install dependencies (if any)
         run: |
-          xcodebuild clean build \
-          -scheme CleanArchitectureDemo \
-          -destination 'platform=iOS Simulator,name=iPhone 15'
+          if [ -f Podfile ]; then
+            pod install
+          fi
 
+      - name: Build and run tests
+        run: |
+          xcodebuild clean test \
+            -project "CleanArchitectureDemo.xcodeproj" \
+            -scheme "CleanArchitectureDemo" \
+            -destination 'platform=iOS Simulator,name=iPhone 15'
